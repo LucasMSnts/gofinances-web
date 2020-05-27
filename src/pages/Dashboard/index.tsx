@@ -30,12 +30,15 @@ interface Balance {
 }
 
 const Dashboard: React.FC = () => {
-  // const [transactions, setTransactions] = useState<Transaction[]>([]);
-  // const [balance, setBalance] = useState<Balance>({} as Balance);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [balance, setBalance] = useState<Balance>({} as Balance);
 
   useEffect(() => {
     async function loadTransactions(): Promise<void> {
-      // TODO
+      const response = await api.get('/transactions');
+
+      setTransactions(response.data.transactions);
+      setBalance(response.data.balance);
     }
 
     loadTransactions();
@@ -51,21 +54,27 @@ const Dashboard: React.FC = () => {
               <p>Entradas</p>
               <img src={income} alt="Income" />
             </header>
-            <h1 data-testid="balance-income">R$ 5.000,00</h1>
+            <h1 data-testid="balance-income">
+              {formatValue(parseFloat(balance.income))}
+            </h1>
           </Card>
           <Card>
             <header>
               <p>Saídas</p>
               <img src={outcome} alt="Outcome" />
             </header>
-            <h1 data-testid="balance-outcome">R$ 1.000,00</h1>
+            <h1 data-testid="balance-outcome">
+              {formatValue(parseFloat(balance.outcome))}
+            </h1>
           </Card>
           <Card total>
             <header>
               <p>Total</p>
               <img src={total} alt="Total" />
             </header>
-            <h1 data-testid="balance-total">R$ 4000,00</h1>
+            <h1 data-testid="balance-total">
+              {formatValue(parseFloat(balance.total))}
+            </h1>
           </Card>
         </CardContainer>
 
@@ -81,6 +90,15 @@ const Dashboard: React.FC = () => {
             </thead>
 
             <tbody>
+              {transactions.map(transaction => (
+                <tr>
+                  <td className="title">{transaction.title}</td>
+                  <td className={transaction.type}>{transaction.value}</td>
+                  <td>{transaction.category.title}</td>
+                  <td>{transaction.created_at}</td>
+                </tr>
+              ))}
+
               <tr>
                 <td className="title">Computer</td>
                 <td className="income">R$ 5.000,00</td>
