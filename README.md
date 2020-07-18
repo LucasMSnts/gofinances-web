@@ -1,6 +1,20 @@
 # GoFinances Web
 Desafio 07 GoStack: GoFinances Web
 
+---
+
+## Tecnologias e Bibliotecas 👨‍💻
+- [Typescript](https://www.typescriptlang.org/)
+- [React](https://pt-br.reactjs.org/)
+  - [Router DOM](https://reacttraining.com/react-router/web/guides/quick-start)
+  - [DropZone](https://react-dropzone.js.org/)
+- [Filesize](https://www.npmjs.com/package/filesize)
+- [Styled Components](https://styled-components.com/)
+- [Polished](https://www.npmjs.com/package/polished)
+- [Axios](https://github.com/axios/axios)
+
+---
+
 ## Iniciar projeto ▶️
 
 Primeiro, fazer um clone do projeto:
